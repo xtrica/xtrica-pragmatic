@@ -29,6 +29,18 @@ export default class Action {
     }
   }
   
+  public areFieldsValid() {
+    let vm = this
+    for (let field in vm.fields) {
+      if (vm.fields.hasOwnProperty(field) && vm.fields[field].hasOwnProperty('value') && vm.fields[field].hasOwnProperty('validator')) {
+        if (vm.fields[field].validator() !== true) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+  
   public getWarnings() {
     let vm = this
     let warnings = []
@@ -74,8 +86,9 @@ export default class Action {
     let vm = this
     return new Promise((resolve, reject) => {
       if (vm.status.loading === false) {
-        if (!vm.getWarnings().length) {
-          vm.status = { loading: true, warning: false, failure: false, success: false, error: -1 }
+        vm.status = { ...vm.status, error: -1 }
+        if (vm.areFieldsValid()) {
+          vm.status = { ...vm.status, loading: true, warning: false, failure: false, success: false }
           vm.request(vm.prepareRequest()).then((response) => {
             vm.status = { ...vm.status, loading: false, warning: false, failure: false, success: true }
             resolve(response)
@@ -88,7 +101,7 @@ export default class Action {
             reject(vm.status.error)
           })
         } else {
-          vm.status = { loading: false, warning: true, failure: false, success: false, error: -1 }
+          vm.status = { ...vm.status, loading: false, warning: true, failure: false, success: false }
           reject(vm.status.error)
         }
       } else {
