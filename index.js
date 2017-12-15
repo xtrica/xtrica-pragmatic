@@ -1,4 +1,4 @@
 module.exports = {
-  Action: require('./src/action.js'),
-  Resource: require('./src/resource.js')
+  Action: require('./src/action.js').default,
+  Resource: require('./src/resource.js').default
 }
