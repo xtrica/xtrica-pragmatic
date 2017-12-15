@@ -1,0 +1,1 @@
+# Xtrica Pragmatic: Front-end object and behavior abstraction.
