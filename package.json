@@ -1,0 +1,11 @@
+{
+  "name": "xtrica-pragmatic",
+  "version": "1.0.1513364675",
+  "description": "Xtrica Pragmatic: Front-end object and behavior abstraction.",
+  "main": "index.js"
+  "author": {
+    "name": "Xtrica",
+    "url": "https://xtrica.com"
+  },
+  "license": "MIT"
+}
