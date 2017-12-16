@@ -86,9 +86,9 @@ export default class Action {
     let vm = this
     return new Promise((resolve, reject) => {
       if (vm.status.loading === false) {
-        vm.status = { ...vm.status, error: -1 }
+        vm.status = { ...vm.status, loading: true, error: -1 }
         if (vm.areFieldsValid()) {
-          vm.status = { ...vm.status, loading: true, warning: false, failure: false, success: false }
+          vm.status = { ...vm.status, warning: false, failure: false, success: false }
           vm.request(vm.prepareRequest()).then((response) => {
             vm.status = { ...vm.status, loading: false, warning: false, failure: false, success: true }
             resolve(response)
