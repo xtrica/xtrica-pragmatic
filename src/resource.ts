@@ -1,17 +1,13 @@
 export default class Resource {
   
   private _name = ''
-  private _parent = null
+  public parent = null
   private _attributes = {}
   private _resources = {}
   private _actions = {}
   
   get name () {
     return this._name;
-  }
-  
-  get parent () {
-    return this._parent;
   }
   
   get attributes () {
@@ -61,7 +57,7 @@ export default class Resource {
       this._name = name
     }
     if (!!parent) {
-      this._parent = parent
+      this.parent = parent
     }
     if (!!attributes) {
       this._attributes = attributes

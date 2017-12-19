@@ -1,6 +1,6 @@
 export default class Action {
   
-  private _parent = null
+  public parent = null
   private _defaults = {}
   private _fields = {}
   public status = {
@@ -11,21 +11,17 @@ export default class Action {
     warning: false
   }
   
-  get parent () {
-    return this._parent;
-  }
-  
   get fields () {
-    return this._fields;
+    return this._fields
   }
   
   set fields (fields) {
     let vm = this
     for (let field in vm._fields) {
       if (vm._fields.hasOwnProperty(field) && fields.hasOwnProperty(field)) {
-        vm._fields[field] = fields[field];
+        vm._fields[field] = fields[field]
+        vm._defaults[field] = JSON.parse(JSON.stringify(vm._fields[field].value))
       }
-      vm._defaults[field] = vm._fields[field].value
     }
   }
   
@@ -72,13 +68,18 @@ export default class Action {
     })
   }
   
-  public reset () {
+  public resetFields () {
     let vm = this
     for (let field in vm._fields) {
       if (vm._fields.hasOwnProperty(field) && vm._defaults.hasOwnProperty(field)) {
-        vm._fields[field].value = vm._defaults[field];
+        vm._fields[field].value = JSON.parse(JSON.stringify(vm._defaults[field]))
       }
     }
+  }
+  
+  public reset () {
+    let vm = this
+    vm.resetFields()
     vm.status = { loading: false, warning: false, failure: false, success: false, error: -1 }
   }
   
@@ -112,7 +113,7 @@ export default class Action {
   
   constructor (parent, fields) {
     if (!!parent) {
-      this._parent = parent
+      this.parent = parent
     }
     if (!!fields) {
       this._fields = fields
