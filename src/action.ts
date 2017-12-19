@@ -20,7 +20,6 @@ export default class Action {
     for (let field in vm._fields) {
       if (vm._fields.hasOwnProperty(field) && fields.hasOwnProperty(field)) {
         vm._fields[field] = fields[field]
-        vm._defaults[field] = JSON.parse(JSON.stringify(vm._fields[field].value))
       }
     }
   }
@@ -117,6 +116,11 @@ export default class Action {
     }
     if (!!fields) {
       this._fields = fields
+      for (let field in this._fields) {
+        if (this._fields.hasOwnProperty(field) && fields.hasOwnProperty(field)) {
+          this._defaults[field] = JSON.parse(JSON.stringify(this._fields[field].value))
+        }
+      }
     }
     this.status = JSON.parse(JSON.stringify(this.status))
   }
