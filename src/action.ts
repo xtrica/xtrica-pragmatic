@@ -11,15 +11,15 @@ export default class Action {
     warning: false
   }
   
-  get parent() {
+  get parent () {
     return this._parent;
   }
   
-  get fields() {
+  get fields () {
     return this._fields;
   }
   
-  set fields(fields) {
+  set fields (fields) {
     let vm = this
     for (let field in vm._fields) {
       if (vm._fields.hasOwnProperty(field) && fields.hasOwnProperty(field)) {
@@ -29,7 +29,7 @@ export default class Action {
     }
   }
   
-  public areFieldsValid() {
+  public areFieldsValid () {
     let vm = this
     for (let field in vm.fields) {
       if (vm.fields.hasOwnProperty(field) && vm.fields[field].hasOwnProperty('value') && vm.fields[field].hasOwnProperty('validator')) {
@@ -41,7 +41,7 @@ export default class Action {
     return true
   }
   
-  public getWarnings() {
+  public getWarnings () {
     let vm = this
     let warnings = []
     for (let field in vm.fields) {
@@ -55,7 +55,7 @@ export default class Action {
     return warnings
   }
   
-  public prepareRequest() {
+  public prepareRequest () {
     let vm = this
     let data = {}
     for (let field in vm.fields) {
@@ -66,13 +66,13 @@ export default class Action {
     return data
   }
   
-  public request(req) {
+  public request (req) {
     return new Promise((resolve, reject) => {
       reject(501)
     })
   }
   
-  public reset() {
+  public reset () {
     let vm = this
     for (let field in vm._fields) {
       if (vm._fields.hasOwnProperty(field) && vm._defaults.hasOwnProperty(field)) {
@@ -82,7 +82,7 @@ export default class Action {
     vm.status = { loading: false, warning: false, failure: false, success: false, error: -1 }
   }
   
-  public submit() {
+  public submit () {
     let vm = this
     return new Promise((resolve, reject) => {
       if (vm.status.loading === false) {
