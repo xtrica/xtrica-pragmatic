@@ -85,7 +85,7 @@ export default class Action {
   public submit () {
     let vm = this
     return new Promise((resolve, reject) => {
-      if (vm.status.loading === false) {
+      if (vm.status.loading === false && vm.status.success === false) {
         vm.status = { ...vm.status, loading: true, error: -1 }
         if (vm.areFieldsValid()) {
           vm.status = { ...vm.status, warning: false, failure: false, success: false }
