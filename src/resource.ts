@@ -52,6 +52,15 @@ export default class Resource {
     }
   }
   
+  public load () {
+    return true
+  }
+  
+  public reload () {
+    let vm = this
+    return vm.load()
+  }
+  
   constructor (name, parent, attributes, resources, actions) {
     if (!!name && name.length) {
       this._name = name
