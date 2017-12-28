@@ -96,7 +96,7 @@ export default class Action {
             if (parseInt(error) > 399 && parseInt(error) < 500) {
               vm.status = { loading: false, warning: true, failure: false, success: false, error: parseInt(error) }
             } else {
-              vm.status = { loading: false, warning: false, failure: true, success: false, error: -1 }
+              vm.status = { loading: false, warning: false, failure: true, success: false, error: 0 }
             }
             reject(vm.status.error)
           })
